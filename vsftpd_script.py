@@ -14,7 +14,6 @@
 
 # open the code directory, run it as "sudo python3 <file>"
 
-
 import os
 import subprocess
 import sys
@@ -66,6 +65,9 @@ local_root=/home/$USER
 pasv_enable=YES
 pasv_min_port=9000
 pasv_max_port=10000
+userlist_enable=YES
+userlist_file=/etc/vsftpd.userlist
+userlist_deny=NO
     """.strip()
 
     try:
@@ -76,6 +78,15 @@ pasv_max_port=10000
         print(f"[!] Failed to write config: {e}")
         sys.exit(1)
 
+    # Create userlist file with allowed user "abhi"
+    try:
+        with open("/etc/vsftpd.userlist", "w") as userlist:
+            userlist.write("abhi\n")
+        print("[✓] /etc/vsftpd.userlist created with user: abhi")
+    except Exception as e:
+        print(f"[!] Failed to write /etc/vsftpd.userlist: {e}")
+        sys.exit(1)
+
     run_cmd("systemctl restart vsftpd")
     run_cmd("systemctl enable vsftpd")
 
@@ -83,7 +94,7 @@ def disable_firewall():
     print("\n🚫 Disabling UFW firewall to avoid FTP port issues...")
     run_cmd("ufw disable", check=False)  # Okay if ufw is not installed/enabled
 
-def create_ftp_user(username="ftpuser", password="ftp@123"):
+def create_ftp_user(username="abhi", password="power"):
     print(f"\n👤 Creating FTP user '{username}'...")
 
     run_cmd(f"useradd -m {username}", check=False)  # Ignore if user exists
@@ -107,7 +118,13 @@ def main():
     configure_vsftpd()
     disable_firewall()
     create_ftp_user()
-    print("\n🎉 vsftpd installation and setup complete! Use FileZilla with passive mode and login using port 21.")
+    print("\n🎉 vsftpd installation and setup complete!")
+    print("   ✅ Login using FileZilla (Passive Mode) with:")
+    print("      - Host: <EC2 Public IP>")
+    print("      - Port: 21")
+    print("      - User: abhi")
+    print("      - Pass: power")
 
 if __name__ == "__main__":
     main()
+
