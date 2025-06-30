@@ -89,7 +89,7 @@ def create_ftp_user(username="ftpuser", password="ftp@123"):
     run_cmd(f"useradd -m {username}", check=False)  # Ignore if user exists
     run_cmd(f"echo '{username}:{password}' | chpasswd")
 
-    ftp_dir = f"/home/{username}/ftp"
+    ftp_dir = f"/home/{username}"
     files_dir = f"{ftp_dir}/files"
 
     run_cmd(f"mkdir -p {files_dir}")
