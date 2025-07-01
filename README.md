@@ -13,6 +13,8 @@
 # 6. Add FTPS (Secured), Port = 990, CIDR Blocks = 0.0.0.0/0  
 # 7. Add FTP, Port = 21, CIDR Blocks = 0.0.0.0/0  
 
+# Commands:
 # download the code/file on ubuntu using, "git clone <code link>" command
-
 # open the code directory, run it as "sudo python3 <file>"
+
+# Pre-defined user abhi, will not be accessed, so it is recommended to remove it.
