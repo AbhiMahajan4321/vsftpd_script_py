@@ -17,4 +17,7 @@
 # download the code/file on ubuntu using, "git clone <code link>" command
 # open the code directory, run it as "sudo python3 <file>"
 
+# If not working then go to this link:
+# https://youtu.be/u2Mi24Ht7qE
+
 # Pre-defined user abhi, will not be accessed, so it is recommended to remove it.
